@@ -1,6 +1,3 @@
-<p align="center">
-  <img src="https://i.ibb.co/MR7DJd7/algorithm-banner.png" alt="Thuật Toán Ứng Dụng Banner" width="80%">
-</p>
 
 # 🚀 Thực Hành Môn **Thuật Toán Ứng Dụng**
 
