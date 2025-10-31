@@ -26,7 +26,6 @@ appear[v] = v đã xuất hiện trong hành trình chưa.
 • Branch and bound: cũng giống TSP
 */
 
-
 #include <iostream> 
 
 using namespace std;
