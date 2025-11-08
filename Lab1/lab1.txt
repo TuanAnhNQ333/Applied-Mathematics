@@ -1,0 +1,35 @@
+# Hướng Giải
+
+## Tư Duy Tổng Thể
+
+Ta chia bài toán thành hai bước chính:
+
+### Bước 1: Quy Hoạch 2D Thành Dãy Histogram 1D
+
+- Với mỗi hàng `i`, ta coi đó là đáy để xây dựng histogram.
+- Ở mỗi cột `j`, ta tính `h[j]` là số ô đen liên tiếp từ hàng hiện tại trở lên:
+    - Nếu `A[i][j] == 1`: `h[j] = h[j] + 1`
+    - Nếu `A[i][j] == 0`: `h[j] = 0`
+- Kết quả: mỗi hàng sẽ sinh ra một dãy chiều cao `h[]`, tương ứng với một histogram.
+
+### Bước 2: Tìm Hình Chữ Nhật Lớn Nhất Trong Histogram
+
+- Áp dụng thuật toán stack (phức tạp O(m) với m là số cột):
+    1. Duyệt từ trái sang phải trên dãy `h[]`.
+    2. Duy trì một stack lưu chỉ số các cột có chiều cao tăng dần.
+    3. Nếu gặp cột thấp hơn đỉnh stack, thực hiện pop để xác định các hình chữ nhật có chiều cao tại đỉnh stack.
+    4. Diện tích: `area = height[top] * (i - stack.top() - 1)`
+
+---
+
+## Tóm Lược Thuật Toán
+
+Giả sử ma trận có `n` hàng, `m` cột:
+
+- Khởi tạo dãy `h[]` với kích thước `m`, giá trị ban đầu là 0.
+- Lần lượt với từng hàng:
+    - Cập nhật lại chiều cao `h[j]`.
+    - Tìm diện tích hình chữ nhật lớn nhất của histogram ở hàng này.
+    - Cập nhật kết quả lớn nhất.
+    
+(Kết thúc phần tóm tắt, thuật toán chi tiết sẽ triển khai tùy theo yêu cầu.)
