@@ -1,82 +1,88 @@
-#include "bits/stdc++.h"
-#include<iostream>
-#include <sstream>
+#include <iostream>
+#include <string>
+#include <map> // Bắt buộc phải có thư viện này để dùng map
+
 using namespace std;
 
-struct CallLog {
-    string from_number;
-    string to_number;
-    string date;
-    string from_time;
-    string end_time;
-};
-
-// Hàmkiểmtratínhhợplệcủasốđiệnthoại
-bool isValidPhoneNumber(const string& number) {
-    if (number.size()!= 10) return false;
-    for (int i = 0; i<number.size(); i++) {
-        if (!(number[i] >= '0' && number[i] <= '9')) return false;
+// Hàm kiểm tra số điện thoại
+bool checkPhoneNumber(string pNum) {
+    if (pNum.length() != 10) return false;
+    for (auto a : pNum) {
+        if (a < '0' || a > '9') {
+            return false;
+        }
     }
     return true;
 }
 
-// Hàmtínhtổngthờigiancuộcgọitheogiây
-int calculateDuration(const string& start, const string& end) {
-    int startTime=  3600*((start[0]-'0')*10 + start[1]-'0')
-                    + 60*((start[3]-'0')*10 + start[4]-'0')
-                    + ((start[6]-'0')*10 + start[7]-'0');
-    int endTime=  3600*((end[0]-'0')*10 + end[1]-'0')
-                    + 60*((end[3]-'0')*10 + end[4]-'0')
-                    + ((end[6]-'0')*10 + end[7]-'0');
-    return endTime - startTime;
+// Hàm tính thời lượng cuộc gọi ra giây
+int countTimeInt(string fTime, string eTime) {
+    int start = 3600 * ((fTime[0] - '0') * 10 + fTime[1] - '0') +
+                60 * ((fTime[3] - '0') * 10 + fTime[4] - '0') +
+                ((fTime[6] - '0') * 10 + fTime[7] - '0');
+    int end = 3600 * ((eTime[0] - '0') * 10 + eTime[1] - '0') +
+              60 * ((eTime[3] - '0') * 10 + eTime[4] - '0') +
+              ((eTime[6] - '0') * 10 + eTime[7] - '0');
+    return end - start;
 }
 
+// KHAI BÁO MAP ĐÚNG
+map<string, int> numberCalls;
+map<string, int> timeCallFrom;
+
+int checkPhone = 1; // Mặc định là đúng
+int numCall = 0;
+
 int main() {
-    vector<CallLog>logs;
-    unordered_map<string, int>calls_from;
-    unordered_map<string, long long>total_time_from;
-    string line;
+    // Tối ưu tốc độ nhập xuất
+    ios_base::sync_with_stdio(false); 
+    cin.tie(NULL);
 
+    string type;
+    cin >> type;
 
-    while (true) {
-        getline(cin, line);
-        if (line == "#") break;
-        if (line.find("call") == 0) {
-        stringstream ss(line);
-            string keyword, from_number, to_number, date, from_time, end_time;
-            ss >> keyword >>from_number>>to_number>> date >>from_time>>end_time;
+    // PHẦN 1: ĐỌC DỮ LIỆU CUỘC GỌI (kết thúc khi gặp #)
+    while (type == "call") {
+        string fNum, tNum, date, fTime, eTime;
+        cin >> fNum >> tNum >> date >> fTime >> eTime;
 
-        logs.push_back({from_number, to_number, date, from_time, end_time});
-        calls_from[from_number]++;
-        total_time_from[from_number] += calculateDuration(from_time, end_time);
+        // Kiểm tra tính hợp lệ (nếu sai thì đánh dấu checkPhone = 0)
+        if (!checkPhoneNumber(fNum) || !checkPhoneNumber(tNum)) {
+            checkPhone = 0;
         }
+
+        // Cập nhật thống kê (Lưu ý: Thường bài toán yêu cầu thống kê tất cả cuộc gọi kể cả khi sđt sai định dạng)
+        numCall++;
+        numberCalls[fNum]++;
+        timeCallFrom[fNum] += countTimeInt(fTime, eTime);
+
+        cin >> type; // Đọc chỉ thị tiếp theo
     }
 
-    while (true) {
-        cin>>line;
-        if (line == "#") break;
-        if (line == "?check_phone_number") {
-            bool all_valid = true;
-            for (const auto&log : logs) {
-                if (!isValidPhoneNumber(log.from_number) || !isValidPhoneNumber(log.to_number)) {
-        all_valid = false;
-        break;
-                }
-            }
-        cout<< (all_valid ?1 : 0) <<endl;
-        } else if (line == "?number_calls_from") {
-            string phone_number;
-        cin>>phone_number;
-        cout<<calls_from[phone_number] <<endl;
-        } else if (line == "?number_total_calls") {
-        cout<<logs.size() <<endl;
-        } else if (line == "?count_time_calls_from") {
-            string phone_number;
-cin>>phone_number;
-cout<<total_time_from[phone_number] <<endl;
+    // PHẦN 2: ĐỌC VÀ TRẢ LỜI TRUY VẤN (kết thúc khi gặp #)
+    // Lúc này biến 'type' đang giữ giá trị "#" từ vòng lặp trên, cần đọc tiếp truy vấn đầu tiên
+    cin >> type; 
+    
+    while (type != "#") {
+        if (type == "?check_phone_number") {
+            cout << checkPhone << "\n";
+        } 
+        else if (type == "?number_total_calls") {
+            cout << numCall << "\n";
+        } 
+        else if (type == "?number_calls_from") {
+            string num;
+            cin >> num;
+            cout << numberCalls[num] << "\n";
+        } 
+        else if (type == "?count_time_calls_from") {
+            string num;
+            cin >> num;
+            cout << timeCallFrom[num] << "\n";
         }
+        
+        cin >> type; // Đọc truy vấn tiếp theo
     }
 
     return 0;
 }
-

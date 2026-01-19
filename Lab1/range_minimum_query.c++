@@ -3,7 +3,7 @@ using namespace std;
 
 int main() {
     int n, queries, i, j, sum = 0;
-cin>>n;
+    cin>>n;
     int a[n];
     int maxLog = log2(n) + 1; // so hang cuamang 2 chieu
     int b[n][maxLog];
@@ -24,11 +24,10 @@ cin>>n;
             }
         }
     }
-	
 	// processing
-cin>>queries;
+    cin>>queries;
     while (queries--) {
-cin>>i>>j;
+        cin>>i>>j;
         int range = (1 << (int)log2(j - i + 1)); // do dai moi khoang
         int column = (int)log2(j - i + 1); // toa do theo cot trenmang 2 chieu
 
@@ -40,6 +39,6 @@ cin>>i>>j;
         sum += minValue;
     }
 
-cout<< sum <<endl;
+    cout<< sum <<endl;
     return 0;
 }

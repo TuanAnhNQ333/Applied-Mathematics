@@ -1,0 +1,22 @@
+1. Các Hàm Toán Học Phổ Biến
+
+Các hàm toán học trong thư viện math.h đều có tham số là một số thuộc kiểu double và có kiểu trả về là double, bạn không cần phải nhớ hết mọi hàm mà chỉ cần nhớ cho mình một vài hàm quan trọng được sử dụng thường xuyên. 
+
+STT	Hàm	Chức năng
+1	pow(x, y)	Trả về xy
+2	sqrt(x)	Trả về căn bậc 2 của x
+3	cbrt(x)	Trả về căn bậc 3 của x
+4	ceil(x)	Trả về số nguyên nhỏ nhất lớn hơn hoặc bằng x, tương đương phép làm tròn lên
+5	floor(x)	Trả về số nguyên lớn nhất nhỏ hơn hoặc bằng x, tương đương phép làm tròn xuống
+6	round(x)	Trả về số nguyên gần x nhất phụ thuộc phần thập phân
+7	fabs(x)	Trả về trị tuyệt đối của số x
+8	exp(x)	Trả về ex
+9	fmod(x, y)	Trả về số dư khi chia x cho y
+10	log(x)	Trả về logarit tự nhiên của x
+11	log10(x)	Trả về logarit thập phân của x
+12	cos(x)	Trả về giá trị hàm cos với x là radian
+13	sin(x)	Trả về giá trị hàm sin với x là radian
+14	tan(x)	Trả về giá trị hàm tan với x là radian
+15	acos(x)	Trả về giá trị hàm arccos với x là radian
+16	asin(x)	Trả về giá trị hàm arcsin với x là radian
+17	atan(x)	Trả về giá trị hàm arctan với x là radian

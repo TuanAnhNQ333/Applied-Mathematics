@@ -1,0 +1,5 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     '/Users/macbook/Documents/main_code/Applied Mathematics/Lab1/output/telco_data_check'
+relocations:     []
+...

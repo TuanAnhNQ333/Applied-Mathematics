@@ -1,0 +1,10 @@
+1. Từ Khóa auto 
+
+Từ khóa auto hay mình tạm gọi là kiểu auto là một tính năng mới từ C++11 tới các phiên bản mới hơn sau này, trước C++11 thì ngôn ngữ lập trình C++ khi khai báo biến bạn phải chỉ ra kiểu dữ liệu tương ứng của biến đó.
+
+Từ khóa auto giúp tự suy luận ra kiểu dữ liệu phù hợp với biến thông qua giá trị bạn gán cho biến đó, đặc điểm này khá giống với các ngôn ngữ lập trình Dynamically Typed Languages như Python.
+
+Nếu bạn đã từng học qua Python thì khi khai báo biến bạn không cần khai báo kiểu dữ liệu cho biến mà kiểu dữ liệu sẽ được tự động xác định dựa vào giá trị mà biến được khởi tạo
+
+Sử dụng từ khóa auto, kiểu dữ liệu của biến sẽ được xác định lúc runtime thay vì compile-time như trước.
+
